@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yoshikawa Player</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+    iframe {
+      border: none;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">Carregando player...</div>
+
+  <script>
+    const container = document.getElementById("container");
+
+    // Função utilitária para pegar o parâmetro da URL
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    // Pega o IMDb ID
+    const imdbId = getQueryParam("imdb_id");
+
+    if (!imdbId) {
+      container.innerHTML = "IMDb ID não fornecido.";
+    } else {
+      // Faz requisição para seu backend
+      fetch(`http://yshk.site:4075/api/stream?imdb_id=${imdbId}`)
+        .then(response => {
+          if (!response.ok) throw new Error("Erro ao buscar stream.");
+          return response.text();
+        })
+        .then(embedHtml => {
+          container.innerHTML = embedHtml;
+        })
+        .catch(err => {
+          console.error(err);
+          container.innerHTML = "Erro ao carregar player.";
+        });
+    }
+  </script>
+</body>
+</html>
