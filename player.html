@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecionando para o player...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const imdbId = params.get("imdb_id");
+
+    if (imdbId) {
+      window.location.href = `http://yshk.site:4075/embed/player?imdb_id=${imdbId}`;
+    } else {
+      document.write("Erro: IMDb ID não fornecido.");
+    }
+  </script>
+</head>
+<body>
+  Redirecionando...
+</body>
+</html>
