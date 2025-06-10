@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecionando para o player...</title>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const imdbId = params.get("imdb_id");
+    const tmdbId = params.get("tmdb_id");
+    const season = params.get("season");
+    const episode = params.get("episode");
+
+    if (imdbId) {
+      // Redirecionar para filme
+      window.location.href = `http://yshk.site:4075/embed/player?imdb_id=${imdbId}`;
+    } else if (tmdbId && season && episode) {
+      // Redirecionar para série
+      window.location.href = `http://yshk.site:4075/embed/player?tmdb_id=${tmdbId}&season=${season}&episode=${episode}`;
+    } else {
+      document.write("Erro: Parâmetros inválidos. Forneça imdb_id para filmes ou tmdb_id, season e episode para séries.");
+    }
+  </script>
+</head>
+<body>
+  Redirecionando...
+</body>
+</html>
