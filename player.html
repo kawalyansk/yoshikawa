@@ -11,33 +11,11 @@
     const episode = params.get("episode");
 
     if (imdbId) {
-      // Redirecionar para filme com URL curta
-      fetch('http://yshk.site:4075/generate-short-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ imdb_id: imdbId })
-      })
-      .then(response => response.json())
-      .then(data => {
-        window.location.href = `http://yshk.site:4075/p/${data.shortId}`;
-      })
-      .catch(error => {
-        document.write(`Erro: Falha ao gerar URL curta. ${error.message}`);
-      });
+      // Redirecionar para filme
+      window.location.href = `http://yshk.site:4075/embed/player?imdb_id=${imdbId}`;
     } else if (tmdbId && season && episode) {
-      // Redirecionar para série com URL curta
-      fetch('http://yshk.site:4075/generate-short-url', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ tmdb_id: tmdbId, season, episode })
-      })
-      .then(response => response.json())
-      .then(data => {
-        window.location.href = `http://yshk.site:4075/p/${data.shortId}`;
-      })
-      .catch(error => {
-        document.write(`Erro: Falha ao gerar URL curta. ${error.message}`);
-      });
+      // Redirecionar para série
+      window.location.href = `http://yshk.site:4075/embed/player?tmdb_id=${tmdbId}&season=${season}&episode=${episode}`;
     } else {
       document.write("Erro: Parâmetros inválidos. Forneça imdb_id para filmes ou tmdb_id, season e episode para séries.");
     }
