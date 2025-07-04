@@ -12,10 +12,10 @@
 
     if (imdbId) {
       // Redirecionar para filme
-      window.location.href = `http://yshk.site:4075/embed/player?imdb_id=${imdbId}`;
+      window.location.href = `http://yshk.site:5161/embed/player?imdb_id=${imdbId}`;
     } else if (tmdbId && season && episode) {
       // Redirecionar para série
-      window.location.href = `http://yshk.site:4075/embed/player?tmdb_id=${tmdbId}&season=${season}&episode=${episode}`;
+      window.location.href = `http://yshk.site:5161/embed/player?tmdb_id=${tmdbId}&season=${season}&episode=${episode}`;
     } else {
       document.write("Erro: Parâmetros inválidos. Forneça imdb_id para filmes ou tmdb_id, season e episode para séries.");
     }
